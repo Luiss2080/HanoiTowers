@@ -133,16 +133,15 @@ java --module-path "$JAVAFX_LIB" --add-modules javafx.controls,javafx.fxml \
 java -cp out Algoritmo.Algoritmo
 ```
 
-También puedes abrir la carpeta como proyecto en **Apache NetBeans** y ajustar `run.jvmargs`.
+También puedes abrir la carpeta como proyecto en **Apache NetBeans** con una biblioteca `JAVAFX` apuntando a tu SDK (F6 ejecuta el juego).
 
 > La compilación y la demo de consola se verificaron; el arranque de la ventana no se pudo verificar (ver Vista rápida).
 
 <details>
 <summary>Configuración del proyecto NetBeans</summary>
 
-- `main.class` en `nbproject/project.properties` apunta a `Algoritmo.Algoritmo` (la demo de consola), **no** a la
-  aplicación gráfica; el JAR de `dist/` arranca esa demo. La GUI es `torreshanoi.TorresHannoi`.
-- `run.jvmargs` contiene una ruta absoluta del equipo del autor (`C:\Users\...\javafx-sdk-23.0.1\lib`): cámbiala por la tuya.
+- `main.class` apunta a `torreshanoi.Launcher`, que delega en la aplicación gráfica `torreshanoi.TorresHannoi` (la demo de consola sigue siendo `Algoritmo.Algoritmo`). El `Main-Class` de `dist/TorresHanoi.jar` es el mismo.
+- `run.jvmargs` usa `${libs.JAVAFX.classpath}` (la biblioteca JAVAFX de tu NetBeans) en lugar de una ruta absoluta del autor.
 - `dist/lib/` incluye JAR de JavaFX 23.0.1, pero sin bibliotecas nativas: no bastan por sí solos para abrir la GUI.
 
 </details>
@@ -158,7 +157,7 @@ discos y contrastar el contador con 2^n − 1.
 - Ranking o guardado de partidas: no existe.
 - `Solución Automática` mueve los discos desde el estado actual del tablero sin reiniciarlo (lectura de código,
   no comprobado en ejecución): puede fallar si ya hay movimientos hechos; conviene reiniciar antes.
-- El JAR de `dist/` arranca la demo de consola, no el juego, y el repo versiona `build/` y `dist/` (≈ 14 MB de binarios).
+- El JAR de `dist/` ahora arranca el juego (`Launcher`), pero sigue sin poder abrir la ventana por sí solo: `dist/lib` no incluye las bibliotecas nativas de JavaFX (usa `java --module-path <SDK>/lib --add-modules javafx.controls,javafx.fxml -jar dist/TorresHanoi.jar`). El repo versiona `build/` y `dist/` (≈ 14 MB de binarios).
 - Rutas de imágenes y sonido relativas al directorio de trabajo (`src/...`); se leen del disco (`File`), no del classpath del JAR.
 - Nombres de clase fuera de la convención Java (`material`, `solucion_Automatica`) y la clase se llama `TorresHannoi`.
 - `nbproject/private/` (rutas locales del autor) está versionado.
