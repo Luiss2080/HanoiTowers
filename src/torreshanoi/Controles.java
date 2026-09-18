@@ -158,6 +158,11 @@ public void mostrarSolucionAutomatica() {
         return;
     }
 
+    // La solucion recursiva asume todos los discos en la torre inicial. Si el jugador ya
+    // hizo movimientos, hay que devolver el tablero (y el contador/cronometro) al inicio;
+    // si no, se sacan discos de la torre equivocada (EmptyStackException) y el contador suma.
+    resetGame();
+
     try {
         movimientosSolucion = solucionAuto.resolverTorres(numberOfDisks);
         if (movimientosSolucion == null || movimientosSolucion.isEmpty()) {
