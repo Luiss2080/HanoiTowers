@@ -148,15 +148,13 @@ También puedes abrir la carpeta como proyecto en **Apache NetBeans** con una bi
 
 ## 🧪 Pruebas
 
-No hay pruebas automatizadas (ni carpeta `test/`). Verificación manual: jugar una partida con distintos números de
+No hay pruebas automatizadas (ni carpeta `test/`). `Solución Automática` reinicia el tablero (movimientos y cronómetro) antes de reproducir la solución; comprobado solo por análisis de la lógica de pilas y compilación, no en la ventana. Verificación manual: jugar una partida con distintos números de
 discos y contrastar el contador con 2^n − 1.
 
 ## 🚧 Lo que todavía no existe
 
 - Pruebas unitarias, CI, LICENSE y capturas de pantalla.
 - Ranking o guardado de partidas: no existe.
-- `Solución Automática` mueve los discos desde el estado actual del tablero sin reiniciarlo (lectura de código,
-  no comprobado en ejecución): puede fallar si ya hay movimientos hechos; conviene reiniciar antes.
 - El JAR de `dist/` ahora arranca el juego (`Launcher`), pero sigue sin poder abrir la ventana por sí solo: `dist/lib` no incluye las bibliotecas nativas de JavaFX (usa `java --module-path <SDK>/lib --add-modules javafx.controls,javafx.fxml -jar dist/TorresHanoi.jar`). El repo versiona `build/` y `dist/` (≈ 14 MB de binarios).
 - Rutas de imágenes y sonido relativas al directorio de trabajo (`src/...`); se leen del disco (`File`), no del classpath del JAR.
 - Nombres de clase fuera de la convención Java (`material`, `solucion_Automatica`) y la clase se llama `TorresHannoi`.
